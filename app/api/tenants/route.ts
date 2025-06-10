@@ -9,7 +9,6 @@ const ENEO_PREDEFINED_OWNER_ROLE_ID = process.env.ENEO_PREDEFINED_OWNER_ROLE_ID 
 
 // Define the schema for tenant creation
 const createTenantSchema = z.object({
-  name: z.string().min(1, 'Organization name is required'),
   email: z.string().email('Valid email is required'),
   techEmail: z.string().email('Valid email is required'),
   password: z.string().min(8, 'Password must be at least 6 characters long'),
@@ -18,8 +17,6 @@ const createTenantSchema = z.object({
     dataProcessingAgreement: z.boolean(),
   }),
 })
-
-export type CreateTenantRequest = z.infer<typeof createTenantSchema>
 
 export interface TenantResponse {
   id: string
