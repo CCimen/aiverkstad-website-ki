@@ -1,13 +1,13 @@
 import Link from "next/link"
 import Image from "next/image"
 import Navbar from "@/components/navbar"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { NordicButton } from "@/components/ui/nordic-button"
 import { ArrowRight, ExternalLink, History, Users, Code, Shield, Globe, CheckCircle } from "lucide-react"
 
 export default function EneoPage() {
   return (
-    <div className="min-h-screen bg-[#F7FAFA]">
+    <div className="min-h-screen bg-nordic-snow">
       <Navbar />
 
       <div className="container py-6 md:py-12 px-4">
@@ -18,9 +18,9 @@ export default function EneoPage() {
               <div className="relative w-24 h-24 md:w-32 md:h-32">
                 <Image src="/images/eneo-logo.png" alt="Eneo logotyp" fill className="object-contain" />
               </div>
-              <h1 className="text-3xl md:text-5xl font-black text-[#0F172A] tracking-tight">Historien bakom Eneo</h1>
+              <h1 className="text-3xl md:text-5xl font-black text-nordic-ink tracking-tight">Historien bakom Eneo</h1>
             </div>
-            <p className="text-lg md:text-xl text-[#334155] max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-nordic-graphite max-w-3xl mx-auto leading-relaxed">
               Från hypotes till verklighet - berättelsen om hur en vision om demokratisk AI blev till Eneo-plattformen
             </p>
           </div>
@@ -38,24 +38,23 @@ export default function EneoPage() {
                   <div className="timeline-icon">
                     <History className="w-4 h-4 md:w-5 md:h-5 text-white" />
                   </div>
-                  <Card className="border-[#CBD5E1] shadow-sm hover:shadow-md transition-shadow">
+                  <Card className="border-nordic-cloud shadow-sm hover:shadow-xl hover:border-nordic-sage hover:-translate-y-1 transition-all duration-300">
                     <CardHeader>
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                        <CardTitle className="text-[#0F172A] text-lg md:text-xl">Våren 2023 - Hypotesen</CardTitle>
-                        <span className="text-sm text-[#334155] font-medium bg-[#F1F5F9] px-3 py-1 rounded-full">
+                        <CardTitle className="text-nordic-ink text-lg md:text-xl">Våren 2023 - Hypotesen</CardTitle>
+                        <span className="text-sm text-nordic-graphite font-medium bg-nordic-frost px-3 py-1 rounded-full">
                           Sundsvalls kommun
                         </span>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-[#475569] mb-4 leading-relaxed">
+                      <p className="text-nordic-steel mb-4 leading-relaxed">
                         Allt började våren 2023 med en hypotes inom Sundsvalls kommun, en hypotes om hur generativ AI
                         skulle kunna tillgängliggöras på ett långsiktigt hållbart sätt i hela offentliga Sverige.
                       </p>
-                      <Button
-                        variant="outline"
+                      <NordicButton
+                        variant="secondary"
                         size="sm"
-                        className="border-[#16A34A] text-[#16A34A] hover:bg-[#16A34A] hover:text-white transition-all"
                         asChild
                       >
                         <Link
@@ -65,7 +64,7 @@ export default function EneoPage() {
                         >
                           Läs hypotesen <ExternalLink className="ml-2 h-3 w-3" />
                         </Link>
-                      </Button>
+                      </NordicButton>
                     </CardContent>
                   </Card>
                 </div>
@@ -75,20 +74,19 @@ export default function EneoPage() {
                   <div className="timeline-icon">
                     <Users className="w-4 h-4 md:w-5 md:h-5 text-white" />
                   </div>
-                  <Card className="border-[#CBD5E1] shadow-sm hover:shadow-md transition-shadow">
+                  <Card className="border-nordic-cloud shadow-sm hover:shadow-xl hover:border-nordic-sage hover:-translate-y-1 transition-all duration-300">
                     <CardHeader>
-                      <CardTitle className="text-[#0F172A] text-lg md:text-xl">Innovationsprocessen</CardTitle>
+                      <CardTitle className="text-nordic-ink text-lg md:text-xl">Innovationsprocessen</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-[#475569] mb-4 leading-relaxed">
+                      <p className="text-nordic-steel mb-4 leading-relaxed">
                         Utifrån hypotesen startade vi en innovationsprocess, där vi avsåg att testa hypotesen
                         tillsammans med näringslivet. En process som möjliggjordes genom vårt tidigare ramavtal rörande
                         "Framåtlutad teknologi".
                       </p>
-                      <Button
-                        variant="outline"
+                      <NordicButton
+                        variant="secondary"
                         size="sm"
-                        className="border-[#16A34A] text-[#16A34A] hover:bg-[#16A34A] hover:text-white transition-all"
                         asChild
                       >
                         <Link
@@ -98,7 +96,7 @@ export default function EneoPage() {
                         >
                           Framåtlutad teknologi <ExternalLink className="ml-2 h-3 w-3" />
                         </Link>
-                      </Button>
+                      </NordicButton>
                     </CardContent>
                   </Card>
                 </div>
@@ -108,20 +106,19 @@ export default function EneoPage() {
                   <div className="timeline-icon">
                     <Code className="w-4 h-4 md:w-5 md:h-5 text-white" />
                   </div>
-                  <Card className="border-[#CBD5E1] shadow-sm hover:shadow-md transition-shadow">
+                  <Card className="border-nordic-cloud shadow-sm hover:shadow-xl hover:border-nordic-sage hover:-translate-y-1 transition-all duration-300">
                     <CardHeader>
-                      <CardTitle className="text-[#0F172A] text-lg md:text-xl">Intric utvecklas</CardTitle>
+                      <CardTitle className="text-nordic-ink text-lg md:text-xl">Intric utvecklas</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-[#475569] mb-4 leading-relaxed">
+                      <p className="text-nordic-steel mb-4 leading-relaxed">
                         Inom den innovationsprocessen utvecklades plattformen Intric, ett lyckat arbete som resulterade
                         i ett beslut om att skala upp plattformen som en ordinarie del i Sundsvalls kommuns och Ånge
                         kommuns infrastruktur.
                       </p>
-                      <Button
-                        variant="outline"
+                      <NordicButton
+                        variant="secondary"
                         size="sm"
-                        className="border-[#16A34A] text-[#16A34A] hover:bg-[#16A34A] hover:text-white transition-all"
                         asChild
                       >
                         <Link
@@ -131,7 +128,7 @@ export default function EneoPage() {
                         >
                           Läs beslutet <ExternalLink className="ml-2 h-3 w-3" />
                         </Link>
-                      </Button>
+                      </NordicButton>
                     </CardContent>
                   </Card>
                 </div>
@@ -141,20 +138,19 @@ export default function EneoPage() {
                   <div className="timeline-icon">
                     <Globe className="w-4 h-4 md:w-5 md:h-5 text-white" />
                   </div>
-                  <Card className="border-[#CBD5E1] shadow-sm hover:shadow-md transition-shadow">
+                  <Card className="border-nordic-cloud shadow-sm hover:shadow-xl hover:border-nordic-sage hover:-translate-y-1 transition-all duration-300">
                     <CardHeader>
-                      <CardTitle className="text-[#0F172A] text-lg md:text-xl">2024 - Öppen källkod</CardTitle>
+                      <CardTitle className="text-nordic-ink text-lg md:text-xl">2024 - Öppen källkod</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-[#475569] mb-4 leading-relaxed">
+                      <p className="text-nordic-steel mb-4 leading-relaxed">
                         Efter detta beslut fortsatte vi att utveckla plattformen samtidigt som vi arbetade med att
                         tillgängliggöra den som öppen källkod tillsammans med våra partners i utvecklingen, då den öppna
                         källkoden för Intric publicerades i sin helhet.
                       </p>
-                      <Button
-                        variant="outline"
+                      <NordicButton
+                        variant="secondary"
                         size="sm"
-                        className="border-[#16A34A] text-[#16A34A] hover:bg-[#16A34A] hover:text-white transition-all"
                         asChild
                       >
                         <Link
@@ -164,7 +160,7 @@ export default function EneoPage() {
                         >
                           Läs om öppen källkod <ExternalLink className="ml-2 h-3 w-3" />
                         </Link>
-                      </Button>
+                      </NordicButton>
                     </CardContent>
                   </Card>
                 </div>
@@ -174,49 +170,64 @@ export default function EneoPage() {
 
           {/* Why Eneo Section */}
           <div className="mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-6 text-center">Varför skapades Eneo?</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-nordic-ink mb-6 text-center">Varför skapades Eneo?</h2>
 
-            <Card className="border-[#CBD5E1] shadow-sm mb-6">
-              <CardHeader>
-                <CardTitle className="text-[#0F172A] text-lg md:text-xl">Utmaningarna med Intric</CardTitle>
-                <CardDescription className="text-[#475569]">
-                  På grund av flera anledningar var vi tvungna att bryta ut från Intric och skapa Eneo:
+            <Card className="border-nordic-cloud shadow-lg hover:shadow-xl hover:border-nordic-forest hover:-translate-y-1 transition-all duration-300 mb-6 bg-gradient-to-br from-nordic-frost to-nordic-cloud/30">
+              <CardHeader className="pb-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 bg-nordic-forest rounded-lg flex items-center justify-center">
+                    <Shield className="h-5 w-5 text-white" />
+                  </div>
+                  <CardTitle className="text-nordic-ink text-lg md:text-xl">Utmaningarna med Intric</CardTitle>
+                </div>
+                <CardDescription className="text-nordic-steel text-base leading-relaxed">
+                  På grund av flera kritiska anledningar var vi tvungna att bryta ut från Intric och skapa Eneo:
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {[
                     "Att källkoden för Intric kontrollerades av ett enda företag",
                     "Att delar av källkoden behölls stängd och avsågs även framåt behållas stängd",
                     "Att konkurrensen begränsades genom att alla företag i näringslivet inte kunde konkurrera på samma villkor kring plattformen",
                     "Att företaget som kontrollerade källkoden bytte namn till Intric AB och därmed associerade företaget direkt till den öppna plattformen",
                   ].map((item, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-[#DC2626] rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-[#475569] text-sm md:text-base leading-relaxed">{item}</p>
+                    <div key={index} className="flex items-start gap-4 p-3 rounded-lg bg-white/50 border border-nordic-cloud/50 hover:bg-white/80 transition-colors">
+                      <div className="w-3 h-3 bg-red-500 rounded-full mt-2 flex-shrink-0 ring-2 ring-red-200"></div>
+                      <p className="text-nordic-ink text-sm md:text-base leading-relaxed font-medium">{item}</p>
                     </div>
                   ))}
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-[#16A34A] shadow-sm bg-gradient-to-br from-green-50 to-white">
-              <CardHeader>
-                <CardTitle className="text-[#0F172A] text-lg md:text-xl flex items-center gap-2">
-                  <Shield className="h-5 w-5 text-[#16A34A]" />
-                  Syftet med att skapa Eneo
-                </CardTitle>
+            <Card className="border-nordic-sage shadow-lg hover:shadow-xl hover:border-nordic-sage-light hover:-translate-y-1 transition-all duration-300 bg-gradient-to-br from-nordic-mint to-nordic-frost relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-nordic-sage/10 rounded-bl-full -mr-16 -mt-16"></div>
+              <CardHeader className="relative z-10 pb-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 bg-gradient-to-br from-nordic-sage to-nordic-sage-light rounded-lg flex items-center justify-center">
+                    <CheckCircle className="h-5 w-5 text-white" />
+                  </div>
+                  <CardTitle className="text-nordic-ink text-lg md:text-xl">
+                    Syftet med att skapa Eneo
+                  </CardTitle>
+                </div>
+                <CardDescription className="text-nordic-steel text-base leading-relaxed">
+                  Eneo skapades med en tydlig vision om demokratisk AI och öppen utveckling:
+                </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="relative z-10">
                 <div className="space-y-4">
                   {[
                     "Att det offentliga sitter i förarsätet kring källkoden - så att vi gemensamt i en användarförening kan säkerställa att lösningen alltid sätter det offentliga, invånarna, företagarna först. En demokratisk AI.",
                     "Att vi säkerställer att all källkod finns tillgänglig för alla",
                     "Att öka konkurrensen inom näringslivet där alla företag kan delta och bidra på lika villkor",
                   ].map((item, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-[#16A34A] mt-0.5 flex-shrink-0" />
-                      <p className="text-[#0F172A] text-sm md:text-base font-medium leading-relaxed">{item}</p>
+                    <div key={index} className="flex items-start gap-4 p-4 rounded-lg bg-white/70 border border-nordic-sage/20 hover:bg-white/90 hover:border-nordic-sage/40 transition-all duration-200 backdrop-blur-sm">
+                      <div className="w-6 h-6 bg-gradient-to-br from-nordic-sage to-nordic-sage-light rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <CheckCircle className="h-4 w-4 text-white" />
+                      </div>
+                      <p className="text-nordic-ink text-sm md:text-base font-medium leading-relaxed">{item}</p>
                     </div>
                   ))}
                 </div>
@@ -226,32 +237,32 @@ export default function EneoPage() {
 
           {/* FAQ Section */}
           <div className="mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-6 text-center">Vanliga frågor om Eneo</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-nordic-ink mb-6 text-center">Vanliga frågor om Eneo</h2>
 
             <div className="grid gap-4 md:gap-6">
-              <Card className="border-[#CBD5E1] shadow-sm hover:shadow-md transition-shadow">
+              <Card className="border-nordic-cloud shadow-sm hover:shadow-xl hover:border-nordic-sage hover:-translate-y-1 transition-all duration-300">
                 <CardHeader>
-                  <CardTitle className="text-[#0F172A] text-lg">Vem eller vilka kan använda Eneo?</CardTitle>
+                  <CardTitle className="text-nordic-ink text-lg">Vem eller vilka kan använda Eneo?</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-[#475569] leading-relaxed">
+                  <p className="text-nordic-steel leading-relaxed">
                     Vem som helst kan använda, utveckla eller erbjuda Eneo. Har du eller ditt företag kompetens inom det
                     teknikområde som Eneo rör så kan alla ta del av koden och bidra till utvecklingen på samma villkor.
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="border-[#CBD5E1] shadow-sm hover:shadow-md transition-shadow">
+              <Card className="border-nordic-cloud shadow-sm hover:shadow-xl hover:border-nordic-sage hover:-translate-y-1 transition-all duration-300">
                 <CardHeader>
-                  <CardTitle className="text-[#0F172A] text-lg">Finns det några begränsningar i användandet?</CardTitle>
+                  <CardTitle className="text-nordic-ink text-lg">Finns det några begränsningar i användandet?</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-[#475569] mb-4 leading-relaxed">
+                  <p className="text-nordic-steel mb-4 leading-relaxed">
                     De enda begränsningar som finns är kring den licensform som finns för den öppna källkoden, där vi
                     väljer att publicera allt i AGPLv3 då det är den licens som tidigare kod för Intric var utgiven i
                     eller var kompatibel med.
                   </p>
-                  <p className="text-[#475569] leading-relaxed">
+                  <p className="text-nordic-steel leading-relaxed">
                     Valet av licensform grundar sig i en vilja att alla som bidrar till utvecklingen och användningen
                     även delar med sig av sin kod till andra, så att t ex inte en aktör utvecklar en massa intressant
                     funktion som denne sedan håller för sig själv för att skapa ett försprång till andra. Demokratisk AI
@@ -265,36 +276,34 @@ export default function EneoPage() {
 
           {/* Call to Action */}
           <div className="text-center">
-            <Card className="border-[#16A34A] shadow-lg bg-gradient-to-br from-[#F7FAFA] to-green-50">
+            <Card className="border-nordic-sage shadow-lg bg-gradient-to-br from-nordic-snow to-nordic-mint">
               <CardHeader>
-                <CardTitle className="text-[#0F172A] text-xl md:text-2xl">Ta del av Eneo</CardTitle>
-                <CardDescription className="text-[#475569] text-base">
+                <CardTitle className="text-nordic-ink text-xl md:text-2xl">Ta del av Eneo</CardTitle>
+                <CardDescription className="text-nordic-steel text-base">
                   Utforska plattformen och bli en del av den demokratiska AI-rörelsen
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <Button
-                    className="bg-[#16A34A] hover:bg-[#15803D] text-white font-bold transition-all hover:shadow-md"
+                  <NordicButton
+                    variant="primary"
                     asChild
                   >
                     <Link href="/activate">
                       Aktivera plattformen
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="border-[#16A34A] text-[#16A34A] hover:bg-[#16A34A] hover:text-white transition-all"
+                  </NordicButton>
+                  <NordicButton
+                    variant="secondary"
                     asChild
                   >
                     <Link href="https://github.com/sundsvallai/eneo" target="_blank" rel="noopener noreferrer">
                       Källkod <ExternalLink className="ml-2 h-4 w-4" />
                     </Link>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="border-[#16A34A] text-[#16A34A] hover:bg-[#16A34A] hover:text-white transition-all"
+                  </NordicButton>
+                  <NordicButton
+                    variant="secondary"
                     asChild
                   >
                     <Link
@@ -304,7 +313,7 @@ export default function EneoPage() {
                     >
                       Dokumentation <ExternalLink className="ml-2 h-4 w-4" />
                     </Link>
-                  </Button>
+                  </NordicButton>
                 </div>
               </CardContent>
             </Card>
@@ -312,33 +321,6 @@ export default function EneoPage() {
         </div>
       </div>
 
-      <footer className="container px-4 py-6 md:py-10 border-t border-[#CBD5E1] mt-6 md:mt-10">
-        <div className="max-w-[960px] mx-auto">
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 md:gap-6 mb-4 md:mb-6">
-            <Link
-              href="#"
-              className="text-[#475569] text-sm md:text-base text-center hover:text-[#16A34A] transition-colors"
-            >
-              Användarvillkor
-            </Link>
-            <Link
-              href="#"
-              className="text-[#475569] text-sm md:text-base text-center hover:text-[#16A34A] transition-colors"
-            >
-              Integritetspolicy
-            </Link>
-            <Link
-              href="#"
-              className="text-[#475569] text-sm md:text-base text-center hover:text-[#16A34A] transition-colors"
-            >
-              Kontakta oss
-            </Link>
-          </div>
-          <div className="text-center">
-            <p className="text-[#475569] text-sm md:text-base">©2024 AI-verkstaden. Alla rättigheter förbehållna.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }

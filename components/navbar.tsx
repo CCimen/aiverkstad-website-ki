@@ -3,78 +3,51 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Search, Menu, X } from "lucide-react"
-import { useState } from "react"
+import { Menu, X } from "lucide-react"
+import { useState, useEffect } from "react"
 
 export default function Navbar() {
   const pathname = usePathname()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const navItems = [
-    { name: "Översikt", path: "/" },
-    { name: "Plattform", path: "/platform" },
+    { name: "Hem", path: "/" },
     { name: "Om Eneo", path: "/eneo" },
-    { name: "Aktivera", path: "/activate" },
+    { name: "Plattform", path: "/platform" },
   ]
 
   return (
-    <header className="border-b border-[#CBD5E1] bg-white sticky top-0 z-50">
-      <div className="container flex h-[65px] items-center justify-between px-4 md:px-10">
-        <div className="flex items-center gap-4 md:gap-8">
-          <Link href="/" className="flex items-center gap-2 md:gap-4 group">
-            <div className="h-4 w-4 bg-[#0F172A] rounded-sm group-hover:bg-[#16A34A] transition-colors" />
-            <span className="font-bold text-base md:text-lg text-[#0F172A]">AI-verkstaden</span>
+    <header className="border-b border-nordic-cloud bg-nordic-snow/95 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+      <div className="container flex h-[65px] items-center justify-center px-4 md:px-10 relative">
+        {/* Logo - positioned absolute on left */}
+        <div className="absolute left-4 md:left-10">
+          <Link href="/" className="flex items-center group">
+            <span className="font-bold text-base md:text-lg text-nordic-ink hover:text-nordic-forest transition-colors">AI-verkstaden</span>
           </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-6 md:gap-9">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                href={item.path}
-                className={`text-sm font-medium transition-colors ${
-                  pathname === item.path ? "text-[#16A34A]" : "text-[#0F172A] hover:text-[#334155]"
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
         </div>
 
-        <div className="flex items-center gap-2 md:gap-8">
-          {/* Desktop Search */}
-          <div className="hidden md:flex items-center max-w-[200px] lg:max-w-[256px] min-w-[160px]">
-            <div className="flex items-center bg-[#F1F5F9] rounded-xl overflow-hidden transition-all hover:shadow-md focus-within:shadow-md focus-within:ring-1 focus-within:ring-[#16A34A] w-full">
-              <div className="flex items-center justify-center w-10 h-10 bg-[#F1F5F9] pl-4">
-                <Search className="h-6 w-6 text-[#475569]" />
-              </div>
-              <Input
-                placeholder="Sök"
-                className="border-0 bg-[#F1F5F9] text-[#475569] placeholder:text-[#64748B] h-10 px-2 pr-4 focus-visible:ring-0 focus-visible:ring-offset-0"
-                aria-label="Sök"
-              />
-            </div>
-          </div>
-
-          {/* Desktop Buttons */}
-          <div className="hidden md:flex items-center gap-4">
-            <Button
-              className="bg-[#16A34A] hover:bg-[#15803D] text-white font-bold px-4 h-10 rounded-xl transition-all hover:shadow-md text-sm lg:text-base"
-              asChild
+        {/* Centered Navigation */}
+        <nav className="hidden md:flex items-center gap-8">
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              href={item.path}
+              className={`text-sm font-medium transition-colors ${
+                mounted && pathname === item.path ? "text-nordic-forest" : "text-nordic-ink hover:text-nordic-graphite"
+              }`}
             >
-              <Link href="/activate">Kom igång</Link>
-            </Button>
+              {item.name}
+            </Link>
+          ))}
+        </nav>
 
-            <Avatar className="h-10 w-10 ring-offset-background transition-all hover:ring-2 hover:ring-[#16A34A]">
-              <AvatarImage src="/placeholder.svg" />
-              <AvatarFallback className="bg-[#F1F5F9] text-[#475569]">A</AvatarFallback>
-            </Avatar>
-          </div>
-
-          {/* Mobile Menu Button */}
+        {/* Mobile Menu Button - positioned absolute on right */}
+        <div className="absolute right-4 md:right-10">
           <Button
             variant="ghost"
             size="sm"
@@ -89,7 +62,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-[#CBD5E1] bg-white">
+        <div className="md:hidden border-t border-nordic-cloud bg-nordic-snow">
           <div className="container px-4 py-4 space-y-4">
             {/* Mobile Navigation */}
             <nav className="space-y-2">
@@ -98,7 +71,7 @@ export default function Navbar() {
                   key={item.path}
                   href={item.path}
                   className={`block py-2 text-sm font-medium transition-colors ${
-                    pathname === item.path ? "text-[#16A34A]" : "text-[#0F172A] hover:text-[#334155]"
+                    mounted && pathname === item.path ? "text-nordic-forest" : "text-nordic-ink hover:text-nordic-graphite"
                   }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -107,32 +80,6 @@ export default function Navbar() {
               ))}
             </nav>
 
-            {/* Mobile Search */}
-            <div className="flex items-center bg-[#F1F5F9] rounded-xl overflow-hidden">
-              <div className="flex items-center justify-center w-10 h-10 bg-[#F1F5F9] pl-4">
-                <Search className="h-5 w-5 text-[#475569]" />
-              </div>
-              <Input
-                placeholder="Sök"
-                className="border-0 bg-[#F1F5F9] text-[#475569] placeholder:text-[#64748B] h-10 px-2 pr-4 focus-visible:ring-0 focus-visible:ring-offset-0"
-                aria-label="Sök"
-              />
-            </div>
-
-            {/* Mobile Buttons */}
-            <div className="flex items-center justify-between pt-2">
-              <Button
-                className="bg-[#16A34A] hover:bg-[#15803D] text-white font-bold px-4 h-10 rounded-xl transition-all hover:shadow-md flex-1 mr-4"
-                asChild
-              >
-                <Link href="/activate">Kom igång</Link>
-              </Button>
-
-              <Avatar className="h-10 w-10 ring-offset-background transition-all hover:ring-2 hover:ring-[#16A34A]">
-                <AvatarImage src="/placeholder.svg" />
-                <AvatarFallback className="bg-[#F1F5F9] text-[#475569]">A</AvatarFallback>
-              </Avatar>
-            </div>
           </div>
         </div>
       )}

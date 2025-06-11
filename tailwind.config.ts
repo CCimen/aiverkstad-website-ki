@@ -53,6 +53,33 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        nordic: {
+          forest: { 
+            DEFAULT: '#1B4332', 
+            light: '#2D6A4F', 
+            dark: '#14342A' 
+          },
+          sage: { 
+            DEFAULT: '#2D6A4F', 
+            light: '#52B788', 
+            dark: '#234A24' 
+          },
+          mint: { 
+            DEFAULT: '#D8F3DC', 
+            light: '#E9F7ED', 
+            dark: '#B7E4C7' 
+          },
+          ink: '#0B0C0F',
+          graphite: '#2D3748',
+          steel: '#4A5568',
+          cloud: '#E2E8F0',
+          frost: '#F7FAFC',
+          snow: '#FFFFFF',
+          error: '#C53030',
+          warning: '#D69E2E',
+          success: '#1B4332',
+          info: '#2B6CB0'
+        },
         green: {
           50: "#f0fdf4",
           100: "#dcfce7",

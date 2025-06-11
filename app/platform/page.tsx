@@ -1,20 +1,21 @@
 import Link from "next/link"
 import Navbar from "@/components/navbar"
 import { Button } from "@/components/ui/button"
+import { NordicButton } from "@/components/ui/nordic-button"
 import { ArrowRight, CheckCircle, Info } from "lucide-react"
 
 export default function PlatformPage() {
   return (
-    <div className="min-h-screen bg-[#F7FAFA]">
+    <div className="min-h-screen bg-nordic-snow">
       <Navbar />
 
       <div className="container py-12">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl font-bold mb-6 text-[#0F172A]">Generativ AI-plattform</h1>
+          <h1 className="text-h1 text-nordic-ink mb-6">Generativ AI-plattform</h1>
 
           <div className="prose max-w-none">
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-[#CBD5E1] mb-8">
-              <p className="text-lg mb-6 text-[#0F172A]">
+            <div className="bg-nordic-snow p-6 rounded-xl shadow-sm border border-nordic-cloud mb-8">
+              <p className="text-body text-nordic-ink mb-6">
                 Aktivera plattformen Eneo för hela din organisation. Eneo är en plattform där din organisation (kommun,
                 region eller statlig myndighet) kan bygga, använda och dela AI-tillämpningar inom området generativ AI.
                 Genom Eneo får du tillgång till ett nationellt bibliotek av AI-tjänster inom området generativ AI som
@@ -24,7 +25,7 @@ export default function PlatformPage() {
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button
                   variant="outline"
-                  className="border-[#16A34A] text-[#16A34A] hover:bg-[#16A34A] hover:text-white transition-all flex items-center gap-2"
+                  className="border-nordic-forest text-nordic-forest hover:bg-nordic-forest hover:text-white transition-all flex items-center gap-2"
                   asChild
                 >
                   <Link href="/eneo">
@@ -79,7 +80,7 @@ export default function PlatformPage() {
             <div className="mt-8 flex justify-center">
               <Button
                 size="lg"
-                className="bg-[#16A34A] hover:bg-[#15803D] text-white font-bold px-6 py-6 h-auto rounded-xl transition-all hover:shadow-lg flex items-center gap-2"
+                className="bg-nordic-forest hover:bg-nordic-forest-dark text-white font-bold px-6 py-6 h-auto rounded-xl transition-all hover:shadow-lg flex items-center gap-2"
                 asChild
               >
                 <Link href="/activate">
@@ -92,33 +93,6 @@ export default function PlatformPage() {
         </div>
       </div>
 
-      <footer className="container px-4 py-10 border-t border-[#CBD5E1] mt-10">
-        <div className="max-w-[960px] mx-auto">
-          <div className="flex flex-wrap justify-center items-center gap-6 mb-6">
-            <Link
-              href="#"
-              className="text-[#475569] text-base text-center min-w-[160px] hover:text-[#16A34A] transition-colors"
-            >
-              Användarvillkor
-            </Link>
-            <Link
-              href="#"
-              className="text-[#475569] text-base text-center min-w-[160px] hover:text-[#16A34A] transition-colors"
-            >
-              Integritetspolicy
-            </Link>
-            <Link
-              href="#"
-              className="text-[#475569] text-base text-center min-w-[160px] hover:text-[#16A34A] transition-colors"
-            >
-              Kontakta oss
-            </Link>
-          </div>
-          <div className="text-center">
-            <p className="text-[#475569] text-base">©2024 AI-verkstaden. Alla rättigheter förbehållna.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }
