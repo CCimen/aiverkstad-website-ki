@@ -1,130 +1,143 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
+import { useState } from "react"
+import { CheckCircle, Copy, ExternalLink } from "lucide-react"
 import Navbar from "@/components/navbar"
 import { NordicButton } from "@/components/ui/nordic-button"
-import Link from "next/link"
-import { ArrowLeft, Home, CheckCircle, Building2, Mail, Calendar } from "lucide-react"
 import { ActivationTimeline } from "@/components/ui/activation-timeline"
-import { useRouter, useSearchParams } from "next/navigation"
-
+import Link from "next/link"
 
 export default function ConfirmationPage() {
   const searchParams = useSearchParams()
-  const email = searchParams.get("email")
-  const techEmail = searchParams.get("techEmail")
-  const orgName = searchParams.get("orgName")
-
-  return (
-    <div className="min-h-screen bg-nordic-snow">
-      <Navbar />
-
-      <div className="container py-6 md:py-12 px-4">
-        <ActivationTimeline currentStep={2} />
-
-        <div className="max-w-2xl mx-auto text-center">
-          <div className="bg-nordic-frost p-6 md:p-8 rounded-xl shadow-sm border border-nordic-cloud">
-            <div className="mb-6">
-              <div className="relative h-32 w-32 md:h-40 md:w-40 mx-auto mb-6">
-                <div className="absolute inset-0 bg-gradient-to-br from-nordic-sage to-nordic-sage-light rounded-full flex items-center justify-center">
-                  <CheckCircle className="h-16 w-16 md:h-20 md:w-20 text-white" />
-                </div>
-                <div className="absolute -inset-2 bg-nordic-sage/20 rounded-full animate-pulse"></div>
-              </div>
-
-              <h1 className="text-xl md:text-2xl font-bold mb-4 text-nordic-ink">Tack för din intresseanmälan!</h1>
-            </div>
-
-            <div className="bg-nordic-frost p-4 md:p-6 rounded-lg border border-nordic-cloud mb-6 text-left">
-              <h2 className="text-lg font-semibold mb-4 text-nordic-ink flex items-center gap-2">
-                <Building2 className="h-5 w-5 text-nordic-sage" />
-                Organisationsdetaljer
-              </h2>
-
-              <div className="space-y-3 text-sm md:text-base">
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                  <span className="font-medium text-nordic-ink min-w-[120px]">Organisation:</span>
-                  <span className="text-nordic-steel">
-                    {orgName}
-                  </span>
-                </div>
-
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                  <span className="font-medium text-nordic-ink min-w-[120px]">Plattform:</span>
-                  <span className="text-nordic-steel">Eneo - Generativ AI</span>
-                </div>
-
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                  <span className="font-medium text-nordic-ink min-w-[120px]">Status:</span>
-                  <span className="text-nordic-sage font-medium">Aktiv</span>
-                </div>
-
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                  <span className="font-medium text-nordic-ink min-w-[120px]">Aktiverad:</span>
-                  <span className="text-nordic-steel flex items-center gap-1">
-                    <Calendar className="h-4 w-4" />
-                    {new Date().toLocaleDateString("sv-SE")}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg mb-6">
-              <div className="flex items-start gap-2">
-                <Mail className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                <div className="text-left">
-                  <p className="text-sm md:text-base text-blue-800">
-                    <strong>Nästa steg:</strong> Ett meddelande skickas inom kort till era angivna e-postadresser
-                    ({email}, {techEmail}) med
-                    inloggningsuppgifter och vidare instruktioner för att komma igång med plattformen.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-              <NordicButton
-                variant="outline"
-                className="w-full sm:w-auto"
-                asChild
-              >
-                <Link href="/">
-                  <ArrowLeft className="h-4 w-4" />
-                  Återgå till översikt
-                </Link>
+  const [copied, setCopied] = useState(false)
+  
+  // Get credentials from URL params (passed from activate page)
+  const email = searchParams.get('email')
+  const password = searchParams.get('password')
+  const orgName = searchParams.get('orgName')
+  const isNewTenant = searchParams.get('isNewTenant') === 'true'
+  
+  const handleCopyPassword = () => {
+    if (password) {
+      navigator.clipboard.writeText(password)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }
+  }
+  
+  if (!email || !orgName) {
+    return (
+      <div className="min-h-screen bg-nordic-snow">
+        <Navbar />
+        <div className="container py-12">
+          <div className="max-w-md mx-auto text-center">
+            <p className="text-nordic-ink">Något gick fel. Vänligen försök igen.</p>
+            <Link href="/activate">
+              <NordicButton variant="primary" className="mt-4">
+                Tillbaka till aktivering
               </NordicButton>
-            </div>
+            </Link>
           </div>
         </div>
       </div>
-
-      <footer className="container px-4 py-6 md:py-10 border-t border-nordic-cloud mt-6 md:mt-10">
-        <div className="max-w-[960px] mx-auto">
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 md:gap-6 mb-4 md:mb-6">
-            <Link
-              href="#"
-              className="text-nordic-steel text-sm md:text-base text-center hover:text-nordic-sage transition-colors"
-            >
-              Användarvillkor
-            </Link>
-            <Link
-              href="#"
-              className="text-nordic-steel text-sm md:text-base text-center hover:text-nordic-sage transition-colors"
-            >
-              Integritetspolicy
-            </Link>
-            <Link
-              href="#"
-              className="text-nordic-steel text-sm md:text-base text-center hover:text-nordic-sage transition-colors"
-            >
-              Kontakta oss
-            </Link>
+    )
+  }
+  
+  return (
+    <div className="min-h-screen bg-nordic-snow">
+      <Navbar />
+      
+      <div className="container py-6 md:py-12 px-4">
+        <ActivationTimeline currentStep={3} />
+        
+        <div className="max-w-2xl mx-auto">
+          <div className="bg-white p-4 md:p-8 rounded-xl shadow-sm border border-nordic-cloud">
+            <div className="text-center mb-6 md:mb-8">
+              <CheckCircle className="h-12 w-12 md:h-16 md:w-16 text-green-500 mx-auto mb-4" />
+              <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-nordic-ink mb-2">
+                {isNewTenant ? 'Aktivering genomförd!' : 'Välkommen tillbaka!'}
+              </h1>
+              <p className="text-base md:text-lg text-nordic-steel">
+                {orgName} har nu tillgång till Eneo
+              </p>
+            </div>
+            
+            {password && (
+              <div className="bg-nordic-frost p-4 md:p-6 rounded-lg mb-6">
+                <h2 className="text-lg md:text-xl font-semibold text-nordic-ink mb-4">Dina inloggningsuppgifter</h2>
+                
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-sm md:text-base text-nordic-steel font-medium mb-1">Plattform URL</p>
+                    <p className="font-mono text-sm md:text-base break-all">https://plattform.aiverkstad.se</p>
+                  </div>
+                  
+                  <div>
+                    <p className="text-sm md:text-base text-nordic-steel font-medium mb-1">E-post</p>
+                    <p className="font-mono text-sm md:text-base break-all">{email}</p>
+                  </div>
+                  
+                  <div>
+                    <p className="text-sm md:text-base text-nordic-steel font-medium mb-1">Lösenord</p>
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                      <p className="font-mono text-sm md:text-base flex-1 break-all bg-white px-3 py-2 rounded border">{password}</p>
+                      <button
+                        onClick={handleCopyPassword}
+                        className="min-h-[44px] px-4 py-2 text-sm md:text-base font-medium text-white bg-nordic-sage hover:bg-nordic-forest rounded-lg transition-colors flex items-center gap-2 w-full sm:w-auto justify-center"
+                        aria-label="Kopiera lösenord"
+                      >
+                        {copied ? 'Kopierat!' : 'Kopiera'}
+                        <Copy className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+                <p className="text-sm md:text-base text-nordic-steel mt-4">
+                  ✉️ En kopia av dessa uppgifter har skickats till {email}
+                </p>
+              </div>
+            )}
+            
+            <div className="bg-blue-50 p-4 md:p-6 rounded-lg mb-6">
+              <h3 className="text-lg md:text-xl font-semibold mb-3">Nästa steg:</h3>
+              <ol className="list-decimal list-inside space-y-2 text-sm md:text-base">
+                <li>Logga in på plattformen med uppgifterna ovan</li>
+                <li>Byt lösenord vid första inloggningen</li>
+                <li>Utforska befintliga AI-assistenter</li>
+                <li>Skapa din första egna assistent</li>
+                <li>Bjud in kollegor från {orgName}</li>
+              </ol>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href="https://plattform.aiverkstad.se"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 order-1 sm:order-1"
+              >
+                <NordicButton variant="primary" className="w-full min-h-[48px] md:min-h-[52px] text-base md:text-lg font-semibold px-6 py-3">
+                  Gå till plattformen
+                  <ExternalLink className="ml-2 h-5 w-5" />
+                </NordicButton>
+              </a>
+              
+              <Link href="/" className="flex-1 order-2 sm:order-2">
+                <NordicButton variant="outline" className="w-full min-h-[48px] md:min-h-[52px] text-base md:text-lg font-semibold px-6 py-3">
+                  Tillbaka till startsidan
+                </NordicButton>
+              </Link>
+            </div>
           </div>
-          <div className="text-center">
-            <p className="text-nordic-steel text-sm md:text-base">©2024 AI-verkstaden. Alla rättigheter förbehållna.</p>
+          
+          <div className="mt-6 md:mt-8 text-center text-sm md:text-base text-nordic-steel px-4">
+            <p>Har du problem? Kontakta support@aiverkstad.se</p>
+            <p className="mt-2">Detta är en demonstrationsversion med begränsad kapacitet.</p>
           </div>
         </div>
-      </footer>
+      </div>
     </div>
   )
 }

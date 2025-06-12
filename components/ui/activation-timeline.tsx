@@ -24,11 +24,16 @@ export function ActivationTimeline({ currentStep }: ActivationTimelineProps) {
       id: "confirmation",
       title: "Bekräftelse",
       status: currentStep > 2 ? 'completed' : currentStep === 2 ? 'current' : 'pending'
+    },
+    {
+      id: "complete",
+      title: "Klart",
+      status: currentStep > 3 ? 'completed' : currentStep === 3 ? 'current' : 'pending'
     }
   ]
 
   return (
-    <div className="w-full max-w-2xl mx-auto mb-6">
+    <div className="w-full max-w-2xl mx-auto mb-6 px-4">
       <div className="flex items-center justify-between relative">
         {/* Progress line */}
         <div className="absolute top-3 left-6 right-6 h-px bg-nordic-cloud">
@@ -41,7 +46,7 @@ export function ActivationTimeline({ currentStep }: ActivationTimelineProps) {
         </div>
 
         {steps.map((step, index) => (
-          <div key={step.id} className="flex flex-col items-center relative z-10 flex-1">
+          <div key={step.id} className="flex flex-col items-center relative z-10 flex-1 min-w-0">
             {/* Step indicator */}
             {step.status === 'completed' || (step.status === 'current' && index === 2) ? (
               <CheckCircle className="w-6 h-6 text-nordic-sage fill-nordic-sage" />
@@ -56,9 +61,9 @@ export function ActivationTimeline({ currentStep }: ActivationTimelineProps) {
             )}
 
             {/* Step title */}
-            <div className="mt-2 text-center">
+            <div className="mt-2 text-center px-1">
               <h3 className={cn(
-                "font-medium text-xs transition-colors leading-tight",
+                "font-medium text-xs transition-colors leading-tight break-words",
                 {
                   "text-nordic-sage": step.status === 'completed' || step.status === 'current',
                   "text-nordic-steel": step.status === 'pending'

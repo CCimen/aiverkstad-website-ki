@@ -1,0 +1,10 @@
+# Eneo Demo Setup Dependencies
+# 
+# These packages enhance the setup script functionality but are optional.
+# The script will work without them using fallback implementations.
+
+# Environment file loading (recommended)
+python-dotenv>=0.19.0
+
+# HTTP requests with better error handling (recommended)
+requests>=2.25.0
