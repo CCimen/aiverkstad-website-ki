@@ -290,7 +290,7 @@ export default function EneoPage() {
                     asChild
                   >
                     <Link href="/activate">
-                      Aktivera plattformen
+                      Testa plattformen
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </NordicButton>

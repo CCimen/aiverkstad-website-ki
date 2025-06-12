@@ -21,14 +21,9 @@ export function ActivationTimeline({ currentStep }: ActivationTimelineProps) {
       status: currentStep > 1 ? 'completed' : currentStep === 1 ? 'current' : 'pending'
     },
     {
-      id: "agreement",
-      title: "Avtal och signering",
-      status: currentStep > 2 ? 'completed' : currentStep === 2 ? 'current' : 'pending'
-    },
-    {
       id: "confirmation",
       title: "Bekräftelse",
-      status: currentStep > 3 ? 'completed' : currentStep === 3 ? 'current' : 'pending'
+      status: currentStep > 2 ? 'completed' : currentStep === 2 ? 'current' : 'pending'
     }
   ]
 
@@ -37,10 +32,10 @@ export function ActivationTimeline({ currentStep }: ActivationTimelineProps) {
       <div className="flex items-center justify-between relative">
         {/* Progress line */}
         <div className="absolute top-3 left-6 right-6 h-px bg-nordic-cloud">
-          <div 
+          <div
             className="h-full bg-nordic-sage transition-all duration-500 ease-out"
-            style={{ 
-              width: `${((currentStep - 1) / (steps.length - 1)) * 100}%` 
+            style={{
+              width: `${((currentStep - 1) / (steps.length - 1)) * 100}%`
             }}
           />
         </div>

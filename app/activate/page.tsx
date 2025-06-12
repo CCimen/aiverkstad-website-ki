@@ -10,29 +10,40 @@ import { Label } from "@/components/ui/label"
 import { ActivationTimeline } from "@/components/ui/activation-timeline"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { ArrowRight, Mail } from "lucide-react"
+import { ArrowRight, Mail, Building } from "lucide-react"
 
 export default function ActivatePage() {
   const router = useRouter()
   const [email, setEmail] = useState("")
   const [techEmail, setTechEmail] = useState("")
+  const [orgName, setOrgName] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
-    // Store form data in localStorage for later steps
-    const formData = {
-      email,
-      techEmail
+
+    // send mail
+    setIsLoading(true)
+    try {
+      const signupResponse = await fetch("/api/signup", {
+        method: "POST",
+        body: JSON.stringify({ email, techEmail, orgName })
+      })
+      if (!signupResponse.ok) {
+        throw new Error("Failed to send mail")
+      }
+      // Navigate to next step with data in URL params as backup
+      const params = new URLSearchParams({
+        email,
+        techEmail,
+        orgName
+      })
+      router.push(`/confirmation?${params.toString()}`)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setIsLoading(false)
     }
-    localStorage.setItem('activationData', JSON.stringify(formData))
-    
-    // Navigate to next step with data in URL params as backup
-    const params = new URLSearchParams({
-      email,
-      techEmail
-    })
-    router.push(`/sign?${params.toString()}`)
   }
 
   return (
@@ -41,13 +52,13 @@ export default function ActivatePage() {
 
       <div className="container py-12">
         <ActivationTimeline currentStep={1} />
-        
+
         <div className="max-w-md mx-auto">
           <div className="bg-nordic-frost p-8 rounded-xl shadow-sm border border-nordic-cloud">
             <h1 className="text-h2 text-nordic-ink mb-6">Kontaktuppgifter</h1>
 
             <p className="mb-6 text-nordic-ink">
-              Ange följande uppgifter för att aktivera din organisations instans av plattformen:
+              Ange följande uppgifter för att få tillgång till en testversion av plattformen.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -87,12 +98,31 @@ export default function ActivatePage() {
                 </div>
               </div>
 
+              <div className="space-y-2">
+                <Label htmlFor="orgName" className="text-nordic-ink">
+                  Organisation
+                </Label>
+                <div className="relative">
+                  <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-nordic-steel" />
+                  <Input
+                    id="orgName"
+                    type="text"
+                    placeholder="Organisationens namn"
+                    value={orgName}
+                    onChange={(e) => setOrgName(e.target.value)}
+                    className="pl-10 border-nordic-cloud focus:border-nordic-sage focus:ring-nordic-sage transition-all"
+                    required
+                  />
+                </div>
+              </div>
+
               <NordicButton
                 type="submit"
                 variant="primary"
                 className="w-full"
+                disabled={isLoading}
               >
-                Gå vidare till signering
+                {isLoading ? "Skickar..." : "Skicka intresseanmälan"}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </NordicButton>
             </form>
