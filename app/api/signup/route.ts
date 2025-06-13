@@ -9,7 +9,7 @@ const getResend = () => new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(request: NextRequest) {
   const { email, techEmail, orgName } = await request.json()
-  
+
   // Validate government email
   if (!isValidGovEmail(email) || !isValidGovEmail(techEmail)) {
     return NextResponse.json(
@@ -120,7 +120,7 @@ export async function POST(request: NextRequest) {
       const resend = getResend()
       await resend.emails.send({
         from: process.env.RESEND_FROM_EMAIL!,
-        to: process.env.RESEND_RECIPIENTS!.split(','),
+        to: process.env.RESEND_RECIPIENT!,
         subject: `Välkommen till Eneo - ${orgName}`,
         html: `
           <h2>Välkommen till Eneo!</h2>
@@ -140,18 +140,20 @@ export async function POST(request: NextRequest) {
             <li>Skapa din första egna assistent</li>
             <li>Bjud in kollegor från ${orgName}</li>
           </ol>
-          
+
           <p>Vid frågor, kontakta aiverkstad@sundsvall.se</p>
-          
+
           <hr>
           <p><small>Detta är en demonstrationsversion med begränsad kapacitet.</small></p>
         `
       })
+      console.log('Email sent successfully to:', process.env.RESEND_RECIPIENT)
+      console.log('Email sent successfully from:', process.env.RESEND_FROM_EMAIL)
     } catch (emailError) {
       console.error('Email send failed:', emailError)
       // Continue - we'll show credentials on web anyway
     }
-    
+
     // Return success with credentials for web display
     return NextResponse.json({
       success: true,

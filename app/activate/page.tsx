@@ -22,28 +22,27 @@ export default function ActivatePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-    
+
     try {
       const response = await fetch("/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, techEmail, orgName })
       })
-      
+
       const data = await response.json()
-      
+
       if (!response.ok) {
         throw new Error(data.error || "Något gick fel")
       }
-      
+
       // Pass credentials via URL params to confirmation page
       const params = new URLSearchParams({
         email: data.email,
-        password: data.password || '', // Empty if existing user
         orgName: data.orgName,
         isNewTenant: String(data.isNewTenant)
       })
-      
+
       router.push(`/confirmation?${params.toString()}`)
     } catch (error: any) {
       alert(error.message || "Ett fel uppstod. Försök igen.")
