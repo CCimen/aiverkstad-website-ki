@@ -114,28 +114,26 @@ export async function POST(request: NextRequest) {
       }
       throw new Error('Failed to create user')
     }
-    
-    const userData = await userRes.json()
-    
+
     // 6. Send email with credentials
     try {
       const resend = getResend()
       await resend.emails.send({
         from: process.env.RESEND_FROM_EMAIL!,
-        to: [email],
+        to: process.env.RESEND_RECIPIENTS!.split(','),
         cc: [techEmail],
         subject: `Välkommen till Eneo - ${orgName}`,
         html: `
           <h2>Välkommen till Eneo!</h2>
           <p>Din organisation "${orgName}" har nu tillgång till AI-plattformen Eneo.</p>
-          
+
           <h3>Inloggningsuppgifter:</h3>
           <p><strong>URL:</strong> https://plattform.aiverkstad.se</p>
           <p><strong>E-post:</strong> ${email}</p>
           <p><strong>Lösenord:</strong> ${password}</p>
-          
+
           <p>Vi rekommenderar att du byter lösenord vid första inloggningen.</p>
-          
+
           <h3>Nästa steg:</h3>
           <ol>
             <li>Logga in på plattformen</li>
