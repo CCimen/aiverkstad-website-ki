@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 import { Resend } from "resend"
 import { isValidGovEmail } from "@/lib/municipality-validator"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Initialize Resend conditionally to avoid build-time errors
+const getResend = () => new Resend(process.env.RESEND_API_KEY)
 
 // Remove in-memory tracking - use database as source of truth
 
@@ -118,6 +119,7 @@ export async function POST(request: NextRequest) {
     
     // 6. Send email with credentials
     try {
+      const resend = getResend()
       await resend.emails.send({
         from: process.env.RESEND_FROM_EMAIL!,
         to: [email],

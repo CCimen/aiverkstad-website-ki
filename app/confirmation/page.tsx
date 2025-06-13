@@ -1,14 +1,14 @@
 "use client"
 
 import { useSearchParams } from "next/navigation"
-import { useState } from "react"
+import { useState, Suspense } from "react"
 import { CheckCircle, Copy, ExternalLink } from "lucide-react"
 import Navbar from "@/components/navbar"
 import { NordicButton } from "@/components/ui/nordic-button"
 import { ActivationTimeline } from "@/components/ui/activation-timeline"
 import Link from "next/link"
 
-export default function ConfirmationPage() {
+function ConfirmationContent() {
   const searchParams = useSearchParams()
   const [copied, setCopied] = useState(false)
   
@@ -139,5 +139,15 @@ export default function ConfirmationPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function ConfirmationPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-nordic-snow flex items-center justify-center">
+      <div className="text-nordic-ink">Laddar...</div>
+    </div>}>
+      <ConfirmationContent />
+    </Suspense>
   )
 }
