@@ -130,11 +130,11 @@ def load_environment() -> Config:
             print_success("Loaded .env file manually")
     else:
         print_warning("No .env file found, using environment variables")
-    
+
     # Load configuration with defaults
     config = Config(
         backend_url=os.getenv("ENEO_BACKEND_URL", "http://localhost:8123"),
-        api_key=os.getenv("INTRIC_SUPER_API_KEY", ""),
+        api_key=os.getenv("ENEO_SUPER_API_KEY", ""),
         api_key_header=os.getenv("ENEO_API_KEY_HEADER_NAME", "X-API-Key"),
         tenant_count=int(os.getenv("DEMO_TENANT_COUNT", "20")),
         quota_limit=int(os.getenv("DEMO_QUOTA_LIMIT", "1073741824")),
@@ -142,20 +142,20 @@ def load_environment() -> Config:
         embedding_model=os.getenv("DEMO_EMBEDDING_MODEL", "text-embedding-ada-002"),
         transcription_model=os.getenv("DEMO_TRANSCRIPTION_MODEL", "whisper-1")
     )
-    
+
     # Validate required configuration
     if not config.api_key:
-        print_error("INTRIC_SUPER_API_KEY environment variable is required")
+        print_error("ENEO_SUPER_API_KEY environment variable is required")
         print_info("Please set it in your .env file or environment")
         sys.exit(1)
-    
+
     # Display configuration
     print_info(f"Backend URL: {config.backend_url}")
     print_info(f"API Key Header: {config.api_key_header}")
     print_info(f"Tenants to create: {config.tenant_count}")
     print_info(f"Quota per tenant: {config.quota_limit:,} bytes")
     print_info(f"Models: {config.completion_model}, {config.embedding_model}, {config.transcription_model}")
-    
+
     return config
 
 
