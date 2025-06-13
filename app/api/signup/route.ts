@@ -121,7 +121,6 @@ export async function POST(request: NextRequest) {
       await resend.emails.send({
         from: process.env.RESEND_FROM_EMAIL!,
         to: process.env.RESEND_RECIPIENTS!.split(','),
-        cc: [techEmail],
         subject: `Välkommen till Eneo - ${orgName}`,
         html: `
           <h2>Välkommen till Eneo!</h2>
