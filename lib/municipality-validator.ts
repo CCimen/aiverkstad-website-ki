@@ -384,19 +384,26 @@ export const agencyDomains = new Set([
 ])
 
 /**
+ * Custom domains
+ */
+export const customDomains = new Set([
+  'kommuna.se',
+])
+
+/**
  * Validates if an email belongs to a Swedish government organization
  * @param email - Email address to validate
  * @returns true if email is from a valid Swedish government domain
  */
 export function isValidGovEmail(email: string): boolean {
   if (!email || typeof email !== 'string') return false
-  
+
   const emailLower = email.toLowerCase().trim()
   const domain = emailLower.split('@')[1]
-  
+
   if (!domain || !domain.endsWith('.se')) return false
-  
-  return municipalityDomains.has(domain) || agencyDomains.has(domain)
+
+  return municipalityDomains.has(domain) || agencyDomains.has(domain) || customDomains.has(domain)
 }
 
 /**
@@ -418,12 +425,13 @@ export function getDomainFromEmail(email: string): string | null {
  * @param email - Email address
  * @returns 'municipality', 'agency', or null
  */
-export function getOrganizationType(email: string): 'municipality' | 'agency' | null {
+export function getOrganizationType(email: string): 'municipality' | 'agency' | 'custom' | null {
   const domain = getDomainFromEmail(email)
   if (!domain) return null
-  
+
   if (municipalityDomains.has(domain)) return 'municipality'
   if (agencyDomains.has(domain)) return 'agency'
-  
+  if (customDomains.has(domain)) return 'custom'
+
   return null
 }

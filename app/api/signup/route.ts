@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
       { status: 400 }
     )
   }
-  
+
   try {
     // 1. Get all tenants to find available pool tenant
     const tenantsRes = await fetch(
@@ -30,33 +30,33 @@ export async function POST(request: NextRequest) {
     )
     const tenantsData = await tenantsRes.json()
     const tenants = tenantsData.items || tenantsData
-    
+
     // 2. Check if org already has a tenant (case-insensitive)
-    const existingTenant = tenants.find((t: any) => 
+    const existingTenant = tenants.find((t: any) =>
       t.display_name && t.display_name.toLowerCase() === orgName.toLowerCase()
     )
-    
+
     let tenant
     let isNewTenant = false
-    
+
     if (existingTenant) {
       tenant = existingTenant
     } else {
       // Find truly available pool tenant (database-based)
-      tenant = tenants.find((t: any) => 
-        t.name.startsWith('demo-pool-') && 
+      tenant = tenants.find((t: any) =>
+        t.name.startsWith('demo-pool-') &&
         (!t.display_name || t.display_name.startsWith('Demo Pool '))
       )
-      
+
       if (!tenant) {
         return NextResponse.json(
           { error: "Demo-kapacitet uppnådd. Vänligen kontakta oss." },
           { status: 503 }
         )
       }
-      
+
       isNewTenant = true
-      
+
       // 3. Update tenant display name
       await fetch(
         `${process.env.ENEO_BACKEND_URL}/api/v1/sysadmin/tenants/${tenant.id}/`,
@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
           password,
           username: email.split('@')[0],
           tenant_id: tenant.id,
-          quota_limit: 1000,
+          quota_limit: 104857600, // 100 MB in bytes
           roles: [],
           predefined_roles: [
             {

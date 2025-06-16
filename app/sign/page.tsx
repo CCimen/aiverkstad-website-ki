@@ -245,6 +245,7 @@ function SignPageContent() {
   const [formData, setFormData] = useState<{
     email: string
     techEmail: string
+    orgName: string
   } | null>(null)
 
   useEffect(() => {
@@ -257,8 +258,9 @@ function SignPageContent() {
         // Fallback to URL params
         const email = searchParams.get('email')
         const techEmail = searchParams.get('techEmail')
-        if (email && techEmail) {
-          setFormData({ email, techEmail })
+        const orgName = searchParams.get('orgName')
+        if (email && techEmail && orgName) {
+          setFormData({ email, techEmail, orgName })
         }
       }
     } catch (error) {
@@ -268,26 +270,43 @@ function SignPageContent() {
     }
   }, [searchParams, router])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!formData) {
       alert('Form data is missing. Please start over.')
       router.push('/activate')
       return
     }
 
-    // Update localStorage with agreement status
-    const updatedData = {
-      ...formData,
-      agreementsSigned: {
-        generalAgreement: agreed,
-        dataProcessingAgreement: agreed
+    try {
+      const response = await fetch("/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: formData.email,
+          techEmail: formData.techEmail,
+          orgName: formData.orgName
+        })
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Något gick fel")
       }
+
+      // Pass credentials via URL params to confirmation page
+      const params = new URLSearchParams({
+        email: data.email,
+        orgName: data.orgName,
+        isNewTenant: String(data.isNewTenant)
+      })
+
+      router.push(`/confirmation?${params.toString()}`)
+    } catch (error: any) {
+      alert(error.message || "Ett fel uppstod. Försök igen.")
     }
-    localStorage.setItem('activationData', JSON.stringify(updatedData))
-    
-    router.push("/confirmation")
   }
 
   const handleScroll = (event: React.UIEvent<HTMLDivElement>, setHasRead: (read: boolean) => void) => {

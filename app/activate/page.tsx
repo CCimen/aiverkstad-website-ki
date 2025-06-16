@@ -21,34 +21,15 @@ export default function ActivatePage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsLoading(true)
 
-    try {
-      const response = await fetch("/api/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, techEmail, orgName })
-      })
+    // Redirect to sign page with form data
+    const params = new URLSearchParams({
+      email,
+      techEmail,
+      orgName
+    })
 
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || "Något gick fel")
-      }
-
-      // Pass credentials via URL params to confirmation page
-      const params = new URLSearchParams({
-        email: data.email,
-        orgName: data.orgName,
-        isNewTenant: String(data.isNewTenant)
-      })
-
-      router.push(`/confirmation?${params.toString()}`)
-    } catch (error: any) {
-      alert(error.message || "Ett fel uppstod. Försök igen.")
-    } finally {
-      setIsLoading(false)
-    }
+    router.push(`/sign?${params.toString()}`)
   }
 
   return (
@@ -127,7 +108,7 @@ export default function ActivatePage() {
                 className="w-full min-h-[48px] md:min-h-[52px] text-base md:text-lg font-semibold px-6 py-3 mt-6 md:mt-8"
                 disabled={isLoading}
               >
-                {isLoading ? "Skickar..." : "Skicka intresseanmälan"}
+                Gå vidare
                 <ArrowRight className="ml-2 h-5 w-5" />
               </NordicButton>
             </form>
