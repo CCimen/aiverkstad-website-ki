@@ -1,30 +1,46 @@
-# AI-verkstaden website
+# Kommuna
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+A Next.js application that serves as the frontend for the Eneo AI platform, enabling Swedish municipalities to register for AI services and access a national library of AI tools.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/ccimens-projects/v0-ai-verkstaden-website)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/aEWuBt86PhF)
+[![Built with Next.js](https://img.shields.io/badge/Built%20with-Next.js-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
 ## Overview
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+Kommuna (formerly AI-verkstaden) provides a registration portal for Swedish municipalities and government agencies to access AI services through the Eneo platform. The application validates government email addresses and provides automated tenant provisioning.
 
-## Deployment
+## Features
 
-Your project is live at:
+- **Municipality Email Validation**: Validates 296 Swedish municipality domains and 84+ government agency domains
+- **Automated Tenant Provisioning**: Integrates with Eneo backend API for tenant management
+- **Nordic Design System**: Custom design system with Nordic color palette
+- **Secure Registration Flow**: Email validation, tenant allocation, and credential management
+- **Responsive Design**: Built with Tailwind CSS and shadcn/ui components
 
-**[https://vercel.com/ccimens-projects/v0-ai-verkstaden-website](https://vercel.com/ccimens-projects/v0-ai-verkstaden-website)**
+## Technology Stack
 
-## Build your app
+- Next.js 15.2.4 with App Router
+- React 19 with TypeScript
+- Tailwind CSS with custom Nordic design system
+- shadcn/ui components with Radix UI primitives
+- Resend for email functionality
+- Jest with Testing Library for testing
 
-Continue building your app on:
+## Getting Started
 
-**[https://v0.dev/chat/projects/aEWuBt86PhF](https://v0.dev/chat/projects/aEWuBt86PhF)**
+```bash
+# Install dependencies
+pnpm install
 
-## How It Works
+# Run development server
+pnpm dev
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+# Build for production
+pnpm build
+
+# Start production server
+pnpm start
+
+# Run tests
+pnpm test
+```

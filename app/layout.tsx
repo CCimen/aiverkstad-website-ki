@@ -7,9 +7,8 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "AI-verkstaden | Eneo Platform",
-  description: "AI services for public organizations",
-    generator: 'v0.dev'
+  title: "Kommuna | Eneo Plattform",
+  description: "AI services for public organizations"
 }
 
 export default function RootLayout({
