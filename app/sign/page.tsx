@@ -16,17 +16,17 @@ import { ActivationTimeline } from "@/components/ui/activation-timeline"
 
 const GeneralAgreement = () => (
   <div className="space-y-4 text-sm leading-relaxed">
-    <h3 className="text-lg font-semibold text-nordic-ink">Generellt avtal för Eneo-plattformen</h3>
+    <h3 className="text-lg font-semibold text-nordic-ink">Generellt avtal för Kommuna-plattformen</h3>
 
     <section>
       <h4 className="font-semibold text-nordic-ink mb-2">1. Allmänna bestämmelser</h4>
       <p className="text-nordic-steel mb-3">
-        Detta avtal reglerar din organisations användning av Eneo-plattformen för generativ AI. Genom att acceptera detta avtal 
+        Detta avtal reglerar din kommuns användning av Kommuna-plattformen för generativ AI. Genom att acceptera detta avtal 
         förbinder sig organisationen att använda plattformen i enlighet med gällande lagar och förordningar samt de riktlinjer 
-        som fastställts av AI-verkstaden.
+        som fastställts av Kommuna.
       </p>
       <p className="text-nordic-steel mb-3">
-        Plattformen tillhandahålls för att stödja offentliga organisationer i deras digitala transformation genom säker 
+        Plattformen tillhandahålls för att stödja kommuner i deras digitala transformation genom säker 
         och transparent användning av AI-teknologi inom ramen för offentlig sektor.
       </p>
     </section>
@@ -34,15 +34,15 @@ const GeneralAgreement = () => (
     <section>
       <h4 className="font-semibold text-nordic-ink mb-2">2. Plattformens syfte och omfattning</h4>
       <p className="text-nordic-steel mb-3">
-        Eneo-plattformen syftar till att erbjuda en säker, skalbar och etisk miljö för utveckling och användning av 
-        generativ AI inom offentlig sektor. Plattformen möjliggör samverkan mellan organisationer och främjar 
+        Kommuna-plattformen syftar till att erbjuda en säker, skalbar och etisk miljö för utveckling och användning av 
+        generativ AI inom offentlig sektor. Plattformen möjliggör samverkan mellan kommuner och främjar 
         innovation inom AI-området.
       </p>
       <ul className="list-disc pl-6 text-nordic-steel space-y-1 mb-3">
-        <li>Tillhandahålla nationella delade AI-tjänster för offentliga organisationer</li>
+        <li>Tillhandahålla nationella delade AI-tjänster för kommuner</li>
         <li>Erbjuda verktyg för utveckling av organisationsspecifika AI-lösningar</li>
         <li>Säkerställa efterlevnad av gällande regelverk och etiska riktlinjer</li>
-        <li>Främja kunskapsdelning och samverkan mellan offentliga aktörer</li>
+        <li>Främja kunskapsdelning och samverkan mellan kommuner</li>
       </ul>
     </section>
 
@@ -507,7 +507,7 @@ function SignPageContent() {
             </Link>
           </div>
           <div className="text-center">
-            <p className="text-nordic-steel text-sm md:text-base">©2024 AI-verkstaden. Alla rättigheter förbehållna.</p>
+            <p className="text-nordic-steel text-sm md:text-base">©2024 Kommuna. Alla rättigheter förbehållna.</p>
           </div>
         </div>
       </footer>

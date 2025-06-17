@@ -94,7 +94,7 @@ export default function AgreementPage() {
             </Link>
           </div>
           <div className="text-center">
-            <p className="text-[#475569] text-base">©2024 AI-verkstaden. Alla rättigheter förbehållna.</p>
+            <p className="text-[#475569] text-base">©2024 Kommuna. Alla rättigheter förbehållna.</p>
           </div>
         </div>
       </footer>

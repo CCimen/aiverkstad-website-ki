@@ -119,7 +119,7 @@ export default function ActivatePage() {
       <footer className="container px-4 py-6 md:py-10 border-t border-nordic-cloud mt-6 md:mt-10">
         <div className="max-w-[960px] mx-auto">
           <div className="text-center">
-            <p className="text-nordic-steel text-xs md:text-base">©2024 AI-verkstaden. Alla rättigheter förbehållna.</p>
+            <p className="text-nordic-steel text-xs md:text-base">©2024 Kommuna. Alla rättigheter förbehållna.</p>
           </div>
         </div>
       </footer>

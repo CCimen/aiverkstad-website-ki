@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
   // Validate government email
   if (!isValidGovEmail(email) || !isValidGovEmail(techEmail)) {
     return NextResponse.json(
-      { error: "Endast svenska myndigheter och kommuner kan registrera sig" },
+      { error: "Endast svenska kommuner kan registrera sig" },
       { status: 400 }
     )
   }
@@ -121,10 +121,10 @@ export async function POST(request: NextRequest) {
       await resend.emails.send({
         from: process.env.RESEND_FROM_EMAIL!,
         to: process.env.RESEND_RECIPIENT!,
-        subject: `Välkommen till Eneo - ${orgName}`,
+        subject: `Välkommen till Kommuna - ${orgName}`,
         html: `
-          <h2>Välkommen till Eneo!</h2>
-          <p>Din organisation "${orgName}" har nu tillgång till AI-plattformen Eneo.</p>
+          <h2>Välkommen till Kommuna!</h2>
+          <p>Din kommun "${orgName}" har nu tillgång till AI-plattformen Kommuna.</p>
 
           <h3>Inloggningsuppgifter:</h3>
           <p><strong>URL:</strong> https://plattform.aiverkstad.se</p>
@@ -141,7 +141,7 @@ export async function POST(request: NextRequest) {
             <li>Bjud in kollegor från ${orgName}</li>
           </ol>
 
-          <p>Vid frågor, kontakta aiverkstad@sundsvall.se</p>
+          <p>Vid frågor, kontakta support@kommuna.se</p>
 
           <hr>
           <p><small>Detta är en demonstrationsversion med begränsad kapacitet.</small></p>

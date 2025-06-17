@@ -27,7 +27,7 @@ nano .env
 ## Step 2: Frontend Environment Setup
 
 ```bash
-# Navigate to your website directory (aiverkstad-website-ki)
+# Navigate to your website directory
 cd ../
 
 # Copy frontend environment template

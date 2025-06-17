@@ -50,7 +50,7 @@ export default function EneoPage() {
                     <CardContent>
                       <p className="text-nordic-steel mb-4 leading-relaxed">
                         Allt började våren 2023 med en hypotes inom Sundsvalls kommun, en hypotes om hur generativ AI
-                        skulle kunna tillgängliggöras på ett långsiktigt hållbart sätt i hela offentliga Sverige.
+                        skulle kunna tillgängliggöras på ett långsiktigt hållbart sätt i Sveriges kommuner.
                       </p>
                       <NordicButton
                         variant="secondary"

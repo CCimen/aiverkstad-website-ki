@@ -50,7 +50,7 @@ function ConfirmationContent() {
                 {isNewTenant ? 'Aktivering genomförd!' : 'Välkommen tillbaka!'}
               </h1>
               <p className="text-base md:text-lg text-nordic-steel">
-                {orgName} har nu tillgång till Eneo
+                {orgName} har nu tillgång till Kommuna
               </p>
             </div>
 
@@ -87,7 +87,7 @@ function ConfirmationContent() {
           </div>
           
           <div className="mt-6 md:mt-8 text-center text-sm md:text-base text-nordic-steel px-4">
-            <p>Har du problem? Kontakta support@aiverkstad.se</p>
+            <p>Har du problem? Kontakta support@kommuna.se</p>
             <p className="mt-2">Detta är en demonstrationsversion med begränsad kapacitet.</p>
           </div>
         </div>

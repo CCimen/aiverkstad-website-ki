@@ -95,14 +95,14 @@ export default function Home() {
         
         <div className="container relative z-10 px-4 text-center">
           <h1 className="text-hero text-white mb-6 drop-shadow-lg">
-            AI för hela offentliga sektorn
+            AI för Sveriges kommuner
           </h1>
           <p className="text-h3 text-white/90 mb-8 max-w-2xl mx-auto drop-shadow-md">
             Demokratisk AI som sätter säkerhet och transparens först
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <NordicButton variant="primary" className="shadow-lg hover:shadow-xl transition-all" asChild>
-              <Link href="/eneo">Kom igång med Eneo</Link>
+              <Link href="/eneo">Kom igång med Kommuna</Link>
             </NordicButton>
             <NordicButton variant="outline" className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:text-white shadow-lg hover:shadow-xl transition-all" asChild>
               <Link href="/platform">Läs mer om plattformen</Link>
@@ -205,9 +205,9 @@ export default function Home() {
                       </CardHeader>
                       <CardContent className="p-0">
                         <CardDescription className="text-nordic-steel text-sm md:text-base leading-5 md:leading-6 mb-4 md:mb-6">
-                          Eneo är en plattform för organisationer att bygga, använda och dela AI-tillämpningar inom
+                          Kommuna är en plattform för kommuner att bygga, använda och dela AI-tillämpningar inom
                           generativ AI. Den erbjuder tillgång till ett nationellt bibliotek av AI-tjänster och
-                          möjligheten att utveckla och dela egna AI-tjänster med andra offentliga myndigheter.
+                          möjligheten att utveckla och dela egna AI-tjänster med andra kommuner i Sverige.
                         </CardDescription>
                         <div className="flex flex-col sm:flex-row gap-3">
                           <NordicButton

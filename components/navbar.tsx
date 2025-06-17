@@ -17,7 +17,7 @@ export default function Navbar() {
 
   const navItems = [
     { name: "Hem", path: "/" },
-    { name: "Om Eneo", path: "/eneo" },
+    { name: "Om Kommuna", path: "/eneo" },
     { name: "Plattform", path: "/platform" },
   ]
 
@@ -27,7 +27,7 @@ export default function Navbar() {
         {/* Logo - positioned absolute on left */}
         <div className="absolute left-4 md:left-10">
           <Link href="/" className="flex items-center group">
-            <span className="font-bold text-base md:text-lg text-nordic-ink hover:text-nordic-forest transition-colors">AI-verkstaden</span>
+            <span className="font-bold text-base md:text-lg text-nordic-ink hover:text-nordic-forest transition-colors">Kommuna</span>
           </Link>
         </div>
 
