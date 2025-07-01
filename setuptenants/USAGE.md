@@ -1,152 +1,175 @@
-# Eneo Demo Tenant Setup Guide
+# Kommuna Demo Tenant Setup Guide
 
-Complete setup guide for creating demo tenants and configuring the user registration system for the Eneo AI platform.
+Complete setup guide for creating demo tenants and configuring the Kommuna user registration system for production deployment.
+
+## Overview
+
+This script automatically creates demo tenants on the Kommuna platform and configures them with the correct AI models and embedding settings. It's designed to work with both local development and production Portainer deployments.
 
 ## Prerequisites
 
-1. **Eneo backend running** on `localhost:8123`
-2. **Sysadmin API key** from your Eneo configuration
+1. **Kommuna backend running** on `https://plattform.kommuna.se`
+2. **Sysadmin API key** from your Kommuna backend configuration
 3. **Python 3.7+**
-4. **Resend API key** for email functionality (optional)
+4. **Resend API key** for email functionality
 
-## Step 1: Backend Environment Setup
+## Environment Setup
+
+### For Production (Portainer Deployment)
+
+The script uses the `.env` file in the `setuptenants/` directory, which is already configured for production:
 
 ```bash
-# Copy backend environment template
-cp .env.example .env
-
-# Edit .env with your actual values
-nano .env
+# Production environment (setuptenants/.env)
+ENEO_BACKEND_URL=https://plattform.kommuna.se
+ENEO_SUPER_API_KEY=sk-super-7f8e9d2a3b4c5e6f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5
+ENEO_API_KEY_HEADER_NAME=X-API-Key
+ENEO_PREDEFINED_OWNER_ROLE_ID=f590099f-da44-4bf2-a38d-8fa6402a28a3
+DEMO_EMBEDDING_MODEL=text-embedding-ada-002
 ```
 
-**Required changes in `.env`:**
-- `INTRIC_SUPER_API_KEY` - Set to your actual sysadmin API key
-- `ENEO_BACKEND_URL` - Verify backend URL (default: http://localhost:8123)
-- `ENEO_API_KEY_HEADER_NAME` - Must match backend config (default: X-API-Key)
+### For Frontend (Root Directory)
 
-## Step 2: Frontend Environment Setup
+Create `.env` from template for Portainer deployment:
 
 ```bash
-# Navigate to your website directory
-cd ../
-
-# Copy frontend environment template
-cp .env.local.example .env.local
-
-# Edit .env.local with your actual values
-nano .env.local
+# Root directory .env (for frontend in Portainer)
+ENEO_BACKEND_URL=http://backend:8000  # Internal Docker network
+ENEO_SUPER_API_KEY=sk-super-7f8e9d2a3b4c5e6f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5
+ENEO_PREDEFINED_OWNER_ROLE_ID=f590099f-da44-4bf2-a38d-8fa6402a28a3
+RESEND_API_KEY=re_GsRAmuwn_BQv4SrWMfqJ5WnNuMbcKP1yA
+RESEND_FROM_EMAIL=onboarding@resend.dev
+RESEND_RECIPIENTS=aiverkstad@sundsvall.se
 ```
 
-**Required changes in `.env.local`:**
-- `ENEO_BACKEND_URL` - Same as backend (http://localhost:8123)
-- `ENEO_SUPER_API_KEY` - Same sysadmin API key from backend
-- `ENEO_PREDEFINED_OWNER_ROLE_ID` - UUID of the "Owner" predefined role from your Eneo backend
-- `RESEND_API_KEY` - Your Resend email service API key
-- `RESEND_FROM_EMAIL` - Email address for sending credentials (e.g., demo@yourdomain.com)
-- `RESEND_RECIPIENTS` - Comma-separated list of admin emails for notifications
+## Running the Setup Script
 
-**To find your predefined role ID:**
-```bash
-# Query your Eneo backend for predefined roles
-curl -H "X-API-Key: YOUR_SUPER_API_KEY" \
-     "http://localhost:8123/api/v1/sysadmin/predefined-roles/"
-# Look for the role with name "Owner" and copy its "id" field
-```
-
-## Step 3: Install Dependencies (Optional)
+### Single Command Setup
 
 ```bash
-# Install optional dependencies for better experience
-pip install -r requirements.txt
-```
-
-**Note:** The script works without these dependencies using fallback implementations.
-
-## Step 4: Run Backend Setup Script
-
-```bash
-# Single command setup - creates tenants and configures models
+cd setuptenants
 python setup_demo.py
 ```
 
-**What this does:**
-- ✅ Automatically loads `.env` file (no export needed!)
-- ✅ Creates 20 pre-configured demo tenants  
-- ✅ Enables AI models for all tenants
-- ✅ Provides colored progress feedback
-- ✅ Comprehensive error handling and validation
+### What the Script Does (Automatically)
 
-## Step 5: Start Frontend Application
+1. **✅ Loads Configuration**
+   - Reads `.env` file from setuptenants directory
+   - Validates all required environment variables
+   - Tests backend connectivity
 
+2. **✅ Creates Demo Tenants**
+   - Creates 20 demo tenants named `demo-pool-01` through `demo-pool-20`
+   - Sets quota limit to 1GB per tenant
+   - Configures active state
+
+3. **✅ Configures AI Models**
+   - Enables completion model (gpt-4o-mini)
+   - Enables embedding model (text-embedding-ada-002)
+   - Enables transcription model (whisper-1)
+
+4. **✅ Configures Tenant-Specific Embedding Models**
+   - **Enables** `text-embedding-ada-002` for all demo tenants
+   - **Disables** `text-embedding-3-small` for all demo tenants
+   - Applies to all existing demo tenants (not just newly created ones)
+
+## User Registration Configuration
+
+The frontend automatically:
+- **User Quota**: 1GB per user (1,073,741,824 bytes)
+- **Login URL**: Users receive `https://plattform.kommuna.se` in welcome emails
+- **Backend Communication**: Uses `http://backend:8000` for internal Docker network calls
+
+## Deployment Workflow
+
+### 1. Create Demo Tenants (Local Computer)
 ```bash
-# Navigate to the website directory
-cd ../
-
-# Install frontend dependencies
-npm install
-# or
-pnpm install
-
-# Start the development server
-npm run dev
-# or
-pnpm run dev
+# Run from your local computer to create tenants on production
+cd setuptenants
+python setup_demo.py
 ```
 
-## Step 6: Verify Complete Setup
+### 2. Deploy Frontend (Portainer)
+- Create `.env` file in root directory with Docker network settings
+- Push changes to GitHub
+- Portainer will auto-deploy with new environment
 
-1. **Backend verification**: The Python script will automatically verify the setup and show you a success summary with tenant count and configured models.
+### 3. Verify Setup
+- Test user registration at `https://plattform.kommuna.se/activate`
+- Use valid Swedish government email (e.g., `test@sundsvall.se`)
+- Verify credentials are displayed and email is sent
 
-2. **Frontend verification**: 
-   - Navigate to `http://localhost:3000/activate` (or your configured port)
-   - Try registering with a valid Swedish government email (e.g., `test@sundsvall.se`)
-   - Verify that credentials are displayed and email is sent
+## Architecture Details
+
+### Environment URLs
+- **Production Backend**: `https://plattform.kommuna.se` (external access)
+- **Docker Internal**: `http://backend:8000` (container-to-container)
+- **Frontend URL**: `https://plattform.kommuna.se` (user access)
+
+### Embedding Model Configuration
+- **Enabled**: `text-embedding-ada-002` (ID: a7aa95de-5c16-4bff-a3d9-f391232b0436)
+- **Disabled**: `text-embedding-3-small` (ID: 57e514ed-fc31-4bc1-a611-ced01441c3ee)
+
+### Tenant Pool Management
+- **Naming**: `demo-pool-01` to `demo-pool-20`
+- **Display Names**: Updated to organization name during registration
+- **Allocation**: First available pool tenant assigned to new organizations
 
 ## Troubleshooting
 
 ### "Cannot connect to backend"
-- Verify Eneo backend is running
-- Check `ENEO_BACKEND_URL` in `.env`
-- Ensure API key is correct
+- Verify backend is running at `https://plattform.kommuna.se`
+- Check API key is correct in setuptenants/.env
+- Test with curl:
+```bash
+curl -X 'GET' \
+  'https://plattform.kommuna.se/api/v1/sysadmin/tenants/' \
+  -H 'X-API-Key: YOUR_API_KEY'
+```
 
-### "Authentication failed" 
-- Verify `INTRIC_SUPER_API_KEY` matches backend configuration
-- Check `ENEO_API_KEY_HEADER_NAME` matches backend expectations
+### "Authentication failed"
+- Verify `ENEO_SUPER_API_KEY` matches backend configuration
+- Ensure API key has sysadmin permissions
 
 ### "Model not found"
-- The script will list available models if any are missing
-- Update model names in `.env` if needed
+- Script will automatically list available models
+- Check backend has required AI models installed
 
-### Python Dependencies
-- Install optional dependencies: `pip install -r requirements.txt`
-- Script works without them but with fewer features
+### Frontend Issues
+- Verify root `.env` uses `http://backend:8000` for Portainer
+- Check all environment variables are set correctly
+- Ensure GitHub deployment triggered Portainer rebuild
 
 ## Success Indicators
 
 - ✅ 20 tenants created with names `demo-pool-01` to `demo-pool-20`
 - ✅ Each tenant has completion, embedding, and transcription models enabled
-- ✅ Frontend signup flow can assign tenants from the pool
+- ✅ `text-embedding-ada-002` enabled for all demo tenants
+- ✅ `text-embedding-3-small` disabled for all demo tenants
+- ✅ Frontend registration flow works with 1GB user quotas
+- ✅ Users receive correct `kommuna.se` URL in welcome emails
 
-## Next Steps
-
-After successful setup:
-1. Test frontend signup at `/activate` page
-2. Use valid Swedish government email (e.g., `test@sundsvall.se`)
-3. Verify credentials are displayed and email is sent
-4. Confirm login works on the platform
-
-## Quick Reference
+## Quick Reference Commands
 
 ```bash
-# Complete setup in one command
-python setup_demo.py
+# Complete tenant setup (run locally)
+cd setuptenants && python setup_demo.py
+
+# Test API connectivity
+curl -X 'GET' 'https://plattform.kommuna.se/api/v1/sysadmin/tenants/' \
+  -H 'X-API-Key: sk-super-7f8e9d2a3b4c5e6f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5'
+
+# Test user registration
+# Visit: https://plattform.kommuna.se/activate
 ```
 
-## Python Script Advantages
+## Script Features
 
-- ✅ **No environment export needed** - automatically loads .env
-- ✅ **Better error messages** - clear validation and troubleshooting
-- ✅ **Progress feedback** - colored output with status indicators  
-- ✅ **Comprehensive validation** - tests connectivity before proceeding
-- ✅ **Single command** - creates tenants and configures models
-- ✅ **Robust JSON handling** - native parsing with error handling
+- ✅ **Production Ready**: Connects directly to `https://plattform.kommuna.se`
+- ✅ **Automated Configuration**: Handles all model setup automatically
+- ✅ **Embedding Model Control**: Ensures correct embedding models are enabled/disabled
+- ✅ **Comprehensive Validation**: Tests connectivity and validates responses
+- ✅ **Colored Progress Output**: Clear visual feedback during execution
+- ✅ **Error Handling**: Detailed error messages and troubleshooting guidance
+- ✅ **Rate Limiting**: Prevents API overload with appropriate delays
+- ✅ **Idempotent**: Safe to run multiple times without duplicating tenants

@@ -394,6 +394,71 @@ def configure_models(config: Config, tenants: List[Dict]) -> bool:
     return success_count > 0
 
 
+def configure_tenant_embedding_models(config: Config) -> bool:
+    """Configure tenant-specific embedding model availability."""
+    print_header("Configuring Tenant Embedding Models")
+    
+    # Get all tenants to configure embedding models for each
+    print_info("Retrieving all tenants...")
+    status_code, response = make_api_request(config, "GET", "api/v1/sysadmin/tenants/")
+    
+    if status_code not in [200, 201]:
+        print_error("Failed to retrieve tenants for embedding model configuration")
+        return False
+    
+    tenants = response.get("items", response.get("data", []))
+    demo_tenants = [t for t in tenants if t["name"].startswith("demo-pool-")]
+    
+    print_info(f"Found {len(demo_tenants)} demo tenants to configure")
+    
+    # Hardcoded embedding model IDs based on your API response
+    ada_002_id = "a7aa95de-5c16-4bff-a3d9-f391232b0436"
+    embedding_3_small_id = "57e514ed-fc31-4bc1-a611-ced01441c3ee"
+    
+    success_count = 0
+    
+    for tenant in demo_tenants:
+        tenant_id = tenant["id"]
+        tenant_name = tenant["name"]
+        
+        print_info(f"Configuring embedding models for {tenant_name}")
+        
+        tenant_success = 0
+        tenant_total = 2  # Two embedding models to configure
+        
+        # Enable text-embedding-ada-002
+        endpoint = f"api/v1/sysadmin/tenants/{tenant_id}/embedding-models/{ada_002_id}/"
+        status_code, response = make_api_request(config, "POST", endpoint, {"is_org_enabled": True})
+        
+        if status_code in [200, 201]:
+            print_success(f"   Enabled text-embedding-ada-002")
+            tenant_success += 1
+        else:
+            print_error(f"   Failed to enable text-embedding-ada-002: {response}")
+        
+        # Disable text-embedding-3-small
+        endpoint = f"api/v1/sysadmin/tenants/{tenant_id}/embedding-models/{embedding_3_small_id}/"
+        status_code, response = make_api_request(config, "POST", endpoint, {"is_org_enabled": False})
+        
+        if status_code in [200, 201]:
+            print_success(f"   Disabled text-embedding-3-small")
+            tenant_success += 1
+        else:
+            print_error(f"   Failed to disable text-embedding-3-small: {response}")
+        
+        if tenant_success == tenant_total:
+            print_success(f"Embedding models configured for {tenant_name}")
+            success_count += 1
+        else:
+            print_warning(f"Partial embedding configuration for {tenant_name} ({tenant_success}/{tenant_total})")
+        
+        time.sleep(0.3)  # Rate limiting
+    
+    print()
+    print_success(f"Successfully configured embedding models for {success_count}/{len(demo_tenants)} tenants")
+    return success_count > 0
+
+
 def main():
     """Main execution function."""
     print_header("Eneo Demo Setup Script")
@@ -424,6 +489,11 @@ def main():
         # Configure models
         if not configure_models(config, tenants):
             print_error("Model configuration failed.")
+            sys.exit(1)
+        
+        # Configure tenant-specific embedding models
+        if not configure_tenant_embedding_models(config):
+            print_error("Tenant embedding model configuration failed.")
             sys.exit(1)
         
         # Success summary

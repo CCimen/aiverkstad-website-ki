@@ -67,7 +67,7 @@ function ConfirmationContent() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="https://plattform.aiverkstad.se"
+                href="https://plattform.kommuna.se"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 order-1 sm:order-1"

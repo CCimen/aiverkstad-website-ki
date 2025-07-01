@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
 
       if (!tenant) {
         return NextResponse.json(
-          { error: "Demo-kapacitet uppnådd. Vänligen kontakta oss." },
+          { error: "Alla demo-miljöer och användare är för närvarande upptagna. Kontakta oss på digitalisering@sundsvall.se för att få tillgång till fler." },
           { status: 503 }
         )
       }
@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
           password,
           username: email.split('@')[0],
           tenant_id: tenant.id,
-          quota_limit: 104857600, // 100 MB in bytes
+          quota_limit: 1073741824, // 1 GB in bytes
           roles: [],
           predefined_roles: [
             {
@@ -127,7 +127,7 @@ export async function POST(request: NextRequest) {
           <p>Din kommun "${orgName}" har nu tillgång till AI-plattformen Kommuna.</p>
 
           <h3>Inloggningsuppgifter:</h3>
-          <p><strong>URL:</strong> https://plattform.aiverkstad.se</p>
+          <p><strong>URL:</strong> https://plattform.kommuna.se</p>
           <p><strong>E-post:</strong> ${email}</p>
           <p><strong>Lösenord:</strong> ${password}</p>
 
