@@ -95,25 +95,35 @@ export default function Home() {
         
         <div className="container relative z-10 px-4 text-center">
           <h1 className="text-hero text-white mb-6 drop-shadow-lg">
-            AI för Sveriges kommuner
+            Framtidens sätt att dela AI- och digitala tjänster mellan kommuner?
           </h1>
-          <p className="text-h3 text-white/90 mb-8 max-w-2xl mx-auto drop-shadow-md">
-            Demokratisk AI som sätter säkerhet och transparens först
+          <p className="text-h3 text-white/90 mb-8 max-w-3xl mx-auto drop-shadow-md">
+            Tänk om kommuner enkelt kunde nyttja nationella och delade tjänster utan långa anslutningsprocesser? Kommuna visar en lösning som skulle ge alla 290 kommuner, oavsett storlek, likvärdiga möjligheter att dra nytta av AI och digitalisering.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <NordicButton variant="primary" className="shadow-lg hover:shadow-xl transition-all" asChild>
-              <Link href="/eneo">Kom igång med Kommuna</Link>
+              <Link href="/eneo">Läs mer om Kommuna</Link>
             </NordicButton>
             <NordicButton variant="outline" className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:text-white shadow-lg hover:shadow-xl transition-all" asChild>
-              <Link href="/platform">Läs mer om plattformen</Link>
+              <Link href="#delade-tjanster">Testa visionen</Link>
             </NordicButton>
           </div>
         </div>
       </section>
 
       {/* Main Content */}
-      <main className="container px-4">
+      <main className="container px-4" id="delade-tjanster">
         <div className="max-w-[960px] mx-auto">
+
+          {/* Delade tjänster Section */}
+          <div className="text-center py-8 md:py-12">
+            <h2 className="text-2xl md:text-4xl font-bold text-nordic-ink mb-4">
+              Delade tjänster
+            </h2>
+            <p className="text-lg text-nordic-graphite max-w-3xl mx-auto leading-relaxed">
+              Så här skulle digitala tjänster kunna delas, där en kommun navigerar mellan färdiga nationella tjänster som går att aktivera på några klick. Samt navigera kring gemensamma plattformar där kommunen själv kan bygga olika former av tjänster.
+            </p>
+          </div>
 
           {/* Tabs */}
           <div className="px-2 md:px-4 pb-3">
@@ -124,20 +134,20 @@ export default function Home() {
                     value="national"
                     className="bg-transparent border-b-3 border-transparent data-[state=active]:border-nordic-sage data-[state=active]:bg-transparent rounded-none px-0 py-3 md:py-4 text-xs md:text-sm font-bold text-nordic-sage data-[state=active]:text-nordic-sage data-[state=inactive]:text-nordic-ink transition-all hover:text-nordic-sage-light w-full sm:w-auto text-center"
                   >
-                    Nationella delade AI-tjänster
+                    Nationella delade tjänster
                   </TabsTrigger>
                   <TabsTrigger
                     value="platforms"
                     className="bg-transparent border-b-3 border-transparent data-[state=active]:border-nordic-sage data-[state=active]:bg-transparent rounded-none px-0 py-3 md:py-4 text-xs md:text-sm font-bold text-nordic-ink data-[state=active]:text-nordic-sage transition-all hover:text-nordic-sage-light w-full sm:w-auto text-center"
                   >
-                    Nationella delade AI-plattformar
+                    Nationella delade plattformar
                   </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="national" className="mt-0">
                   <div className="py-3 md:py-5 px-2 md:px-4">
                     <h3 className="text-h2 text-nordic-ink mb-3 md:mb-5">
-                      Nationella delade AI-tjänster
+                      Nationella delade tjänster
                     </h3>
 
                     {/* Service Cards Grid */}
@@ -194,7 +204,7 @@ export default function Home() {
                 <TabsContent value="platforms" className="mt-0">
                   <div className="py-3 md:py-5 px-2 md:px-4">
                     <h3 className="text-h2 text-nordic-ink mb-3 md:mb-5">
-                      Nationella delade AI-plattformar
+                      Nationella delade plattformar
                     </h3>
 
                     <Card className="bg-nordic-frost border-nordic-cloud rounded-lg p-4 md:p-6 transition-all hover:shadow-xl hover:border-nordic-sage hover:-translate-y-1">
