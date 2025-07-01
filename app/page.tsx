@@ -84,7 +84,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section - Nordic Design */}
-      <section className="relative min-h-[90vh] flex items-center" suppressHydrationWarning>
+      <section className="relative min-h-[75vh] flex items-center" suppressHydrationWarning>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat md:bg-fixed"
           style={{
@@ -97,13 +97,10 @@ export default function Home() {
           <h1 className="text-hero text-white mb-6 drop-shadow-lg">
             Framtidens sätt att dela AI- och digitala tjänster mellan kommuner?
           </h1>
-          <p className="text-h3 text-white/90 mb-8 max-w-3xl mx-auto drop-shadow-md">
+          <p className="text-h3 text-white/90 mb-8 max-w-[62rem] mx-auto drop-shadow-md">
             Tänk om kommuner enkelt kunde nyttja nationella och delade tjänster utan långa anslutningsprocesser? Kommuna visar en lösning som skulle ge alla 290 kommuner, oavsett storlek, likvärdiga möjligheter att dra nytta av AI och digitalisering.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <NordicButton variant="primary" className="shadow-lg hover:shadow-xl transition-all" asChild>
-              <Link href="/eneo">Läs mer om Kommuna</Link>
-            </NordicButton>
             <NordicButton variant="outline" className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:text-white shadow-lg hover:shadow-xl transition-all" asChild>
               <Link href="#delade-tjanster">Testa visionen</Link>
             </NordicButton>
@@ -112,11 +109,12 @@ export default function Home() {
       </section>
 
       {/* Main Content */}
-      <main className="container px-4" id="delade-tjanster">
+      <main className="bg-gradient-to-b from-nordic-snow to-nordic-frost/30 py-8 md:py-12" id="delade-tjanster">
+        <div className="container px-4">
         <div className="max-w-[960px] mx-auto">
 
           {/* Delade tjänster Section */}
-          <div className="text-center py-8 md:py-12">
+          <div className="text-center py-12 md:py-16">
             <h2 className="text-2xl md:text-4xl font-bold text-nordic-ink mb-4">
               Delade tjänster
             </h2>
@@ -145,18 +143,18 @@ export default function Home() {
                 </TabsList>
 
                 <TabsContent value="national" className="mt-0">
-                  <div className="py-3 md:py-5 px-2 md:px-4">
+                  <div className="py-6 md:py-8 px-2 md:px-4">
                     <h3 className="text-h2 text-nordic-ink mb-3 md:mb-5">
                       Nationella delade tjänster
                     </h3>
 
                     {/* Service Cards Grid */}
                     <div className="space-y-3">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                         {aiServices.map((service) => (
                           <Dialog key={service.id}>
                             <DialogTrigger asChild>
-                              <Card className="bg-nordic-frost border-nordic-cloud rounded-lg p-3 md:p-4 cursor-pointer transition-all hover:shadow-xl hover:border-nordic-sage hover:-translate-y-1 group">
+                              <Card className="bg-white border-nordic-cloud/60 rounded-lg p-3 md:p-4 cursor-pointer transition-all shadow-sm hover:shadow-xl hover:border-nordic-sage hover:-translate-y-1 group">
                                 <CardHeader className="p-0 pb-2 md:pb-3">
                                   <service.icon className="h-5 w-5 md:h-6 md:w-6 text-nordic-ink group-hover:text-nordic-forest transition-all duration-300 group-hover:scale-110" />
                                 </CardHeader>
@@ -188,8 +186,10 @@ export default function Home() {
                                 </div>
                                 <p className="text-nordic-ink mb-4 text-sm md:text-base">{service.details}</p>
                                 <div className="flex justify-end">
-                                  <NordicButton variant="primary">
-                                    Läs mer <ArrowRight className="ml-2 h-4 w-4" />
+                                  <NordicButton variant="primary" asChild>
+                                    <Link href="/activate">
+                                      Aktivera tjänst <ArrowRight className="ml-2 h-4 w-4" />
+                                    </Link>
                                   </NordicButton>
                                 </div>
                               </div>
@@ -202,7 +202,7 @@ export default function Home() {
                 </TabsContent>
 
                 <TabsContent value="platforms" className="mt-0">
-                  <div className="py-3 md:py-5 px-2 md:px-4">
+                  <div className="py-6 md:py-8 px-2 md:px-4">
                     <h3 className="text-h2 text-nordic-ink mb-3 md:mb-5">
                       Nationella delade plattformar
                     </h3>
@@ -229,15 +229,6 @@ export default function Home() {
                               <ArrowRight className="h-4 w-4" />
                             </Link>
                           </NordicButton>
-                          <NordicButton
-                            variant="secondary"
-                            asChild
-                          >
-                            <Link href="/eneo">
-                              Om Eneo
-                              <ArrowRight className="h-4 w-4" />
-                            </Link>
-                          </NordicButton>
                         </div>
                       </CardContent>
                     </Card>
@@ -247,7 +238,29 @@ export default function Home() {
             </div>
           </div>
         </div>
+        </div>
       </main>
+
+      {/* Footer */}
+      <footer className="bg-nordic-frost border-t border-nordic-cloud mt-16">
+        <div className="container mx-auto px-4 py-12 md:py-16">
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="text-nordic-ink text-sm leading-relaxed">
+              Kommuna.se är en portal som visar ett exempel för hur smidigt det skulle kunna fungera för kommuner att dela AI-tjänster och digitala tjänster på både nationell nivå och på lokal nivå.
+            </p>
+            <p className="text-nordic-ink text-sm mt-4">
+              Vid frågor kontakta{" "}
+              <a 
+                href="mailto:digitalisering@sundsvall.se" 
+                className="text-nordic-sage hover:text-nordic-forest underline transition-colors"
+              >
+                digitalisering@sundsvall.se
+              </a>
+              .
+            </p>
+          </div>
+        </div>
+      </footer>
 
     </div>
   )
